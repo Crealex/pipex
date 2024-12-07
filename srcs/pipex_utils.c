@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/07 17:17:03 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/07 21:15:08 by atomasi          ###   ########.fr       */
+/*   Created: 2024/12/07 18:11:40 by atomasi           #+#    #+#             */
+/*   Updated: 2024/12/07 18:18:33 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
+#include "../includes/pipex.h"
 
-# define PIPEX_H
+int	write_str(int fd, char *str)
+{
+	int i;
 
-# include <unistd.h>
-# include <sys/wait.h>
-# include <fcntl.h>
-# include "../libft/libft.h"
-
-int	write_str(int fd, char *str);
-
-#endif
+	i = 0;
+	while (str[i])
+	{
+		 if (!write(fd, &str[i], 1))
+		 	return (0);
+		i++;
+	}
+	return (1);
+}
