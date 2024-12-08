@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 17:27:00 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/07 23:10:24 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/08 22:13:20 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ int main(void)
 	char	buff;
 	int		fd;
 
+	//test d'appel du commande systeme
+
 	//test pour creer et ecrire directement dans un fichier
 	fd = open("./test.txt", O_WRONLY);
 	printf("fd : %d\n", fd);
 	write_str(fd, "test de ma petite experience pas piquee des hannetons");
-
 	// test des pipes et des forks
 	pipe(pipefd);
 	pid = fork();
