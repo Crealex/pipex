@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:42:42 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/09 16:32:31 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/09 18:41:43 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ char	**ft_split_pipex(char const *s, char c)
 }
 
 //Pour les tests
-int main ()
+/* int main ()
 {
 	char *str;
 	char **res;
@@ -154,4 +154,4 @@ int main ()
 		i++;
 	}
 	return (0);
-}
+} */

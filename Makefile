@@ -43,6 +43,9 @@ ${OBJDIR}:
 	@mkdir -p ${OBJDIR}/srcs
 	@echo "${BOLD}${BLUE}📁 Created objects directory${END}"
 
+test: ${LIBFT}
+	${CC} srcs/pipex_utils.c srcs/split_pipex_aux.c srcs/ft_split_pipex.c srcs/test.c ${LIBFT}
+
 clean:
 	@echo "${BOLD}${YELLOW}🧹 Cleaning objects...${END}"
 	@rm -rf ${OBJDIR}

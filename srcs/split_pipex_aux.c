@@ -6,13 +6,13 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:28:31 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/09 16:29:26 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/09 18:40:37 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-static void handle_single_quote(const char *s, int *i, int *countl)
+void handle_single_quote(const char *s, int *i, int *countl)
 {
 	(*i)++;  // Skip the opening quote
 	while (s[*i] != '\'' && s[*i])
@@ -23,7 +23,7 @@ static void handle_single_quote(const char *s, int *i, int *countl)
 	(*i)++;  // Skip the closing quote
 }
 
-static int	single_quote(char *res,char *s, int *jres, int *i)
+int	single_quote(char *res,char *s, int *jres, int *i)
 {
 	int si;
 	int ri;
