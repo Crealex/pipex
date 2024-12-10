@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 17:27:00 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/10 12:08:50 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/10 17:18:42 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int	parsing(char **argv, char **env, t_cmd *cmd)
 		return (perror(RED"mauvais nom de cmd 2"END), 0);
 	if (access(argv[1], R_OK) == -1)
 		perror(RED"Imposible de lire fichier 1"END);
-	if (access(argv[4], R_OK | W_OK) == -1)
-		return (perror(RED"Imposible de lire fichier 2"END), 0);
 	return (1);
 }
 
@@ -41,9 +39,8 @@ void	child1_process(t_cmd cmd, t_fd fd, char **env, char *file_path)
 		exit(EXIT_FAILURE);
 	}
 	close(fd.pipefd[0]);
-	dup2(fd.fd1, STDIN_FILENO);
-	printf("%s\n", cmd.path1);
-	dup2(STDOUT_FILENO, fd.pipefd[1]);
+	dup2(STDIN_FILENO, fd.fd1);
+	dup2(fd.pipefd[1], STDOUT_FILENO); // essaye d'inverser les arguements?
 	if (execve(cmd.path1, cmd.cmd1, env) == -1)
 	{
 		perror(RED"Erreur pendant l'execution de la commande 1\n"END);
@@ -60,8 +57,9 @@ void	child2_process(t_cmd cmd, t_fd fd, char **env, char *file_path)
 		exit(EXIT_FAILURE);
 	}
 	close(fd.pipefd[1]);
-	dup2(STDOUT_FILENO, fd.fd2);
-	dup2(fd.pipefd[0], STDIN_FILENO);
+	dup2(fd.fd2, STDOUT_FILENO);
+	dup2(STDIN_FILENO, fd.pipefd[0]);
+	printf("path : %s  cmd : %s\n", cmd.path1, cmd.cmd2[0]);
 	if (execve(cmd.path2, cmd.cmd2, env) == -1)
 	{
 		perror(RED"Erreur pendant l'execution de la commande 2\n"END);
