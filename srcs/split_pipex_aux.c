@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:28:31 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/10 10:27:14 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/10 21:30:38 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	single_quote(char *res,char *s, int *jres, int *i)
 			si++;
 			ri++;
 		}
-		return (1);
+		return (0);
 	}
 	else
 		return (0);

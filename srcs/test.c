@@ -2,7 +2,7 @@
 #include "../includes/pipex.h"
 #include <stdio.h>
 
-int	parsing(char **argv, char **env, t_cmd *cmd)
+/* int	parsing(char **argv, char **env, t_cmd *cmd)
 {
 	int i;
 	char	str_path;
@@ -21,7 +21,7 @@ int	parsing(char **argv, char **env, t_cmd *cmd)
 	if (access(argv[4], R_OK | W_OK) == -1)
 		return (perror("Imposible de lire fichier 2"), 0);
 	return (1);
-}
+} */
 
 int main(int argc, char **argv, char **env) //remplacer experience par main si besoin de test des trucs
 {
@@ -30,18 +30,18 @@ int main(int argc, char **argv, char **env) //remplacer experience par main si b
 	//char	buff;
 	//int		fd;
 	//char *tab_arg[3];
-	//char **str;
+	char **str;
 	int i;
 	char *res;
 	//t_cmd cmd;
-
-	if (res = find_path_env(env))
+	res = "awk '{print $2 $3}' cd";
+	str = ft_split_pipex(res, ' ');
+	printf("test ta mere la pute\n");
+	i = 0;
+	while (str[i])
 	{
-		printf("Result : %s\n", res);
-	}
-	else
-	{
-		printf(RED"Ton code fonctionne pas espece de boulet !\n"END);
+		printf("%d : %s\n", i, str[i]);
+		i++;
 	}
 	/*if (!parsing(argv, env, &cmd))
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:42:42 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/10 10:26:06 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/10 21:30:00 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static int	counterc_pipex(char const *s, char c)
 				while (s[i] != '\'')
 					i++;
 			}
+
 		}
 	}
 	return (count);
@@ -117,6 +118,7 @@ char	**ft_split_pipex(char const *s, char c)
 	int		i;
 
 	i = 0;
+	//printf("test\n");
 	if (!s)
 		return (NULL);
 	word_count = counterc_pipex(s, c);
