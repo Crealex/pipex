@@ -30,16 +30,25 @@ int main(int argc, char **argv, char **env) //remplacer experience par main si b
 	//char	buff;
 	//int		fd;
 	//char *tab_arg[3];
-	char **str;
+	//char **str;
 	int i;
-	t_cmd cmd;
+	char *res;
+	//t_cmd cmd;
 
-	if (!parsing(argv, env, &cmd))
+	if (res = find_path_env(env))
+	{
+		printf("Result : %s\n", res);
+	}
+	else
+	{
+		printf(RED"Ton code fonctionne pas espece de boulet !\n"END);
+	}
+	/*if (!parsing(argv, env, &cmd))
 		return (1);
 	printf("file name 1 : %s\n", argv[1]);
 	printf("cmd 1 : %s\n", cmd.cmd1[0]);
 	printf("cmd 2 : %s\n", cmd.cmd2[0]);
-	printf("file name 2 : %s\n", argv[4]);
+	printf("file name 2 : %s\n", argv[4]);*/
 /* 	i = 0;
 	str = ft_split(ft_substr(env[31], 5, 158), ':');
 	while (str[i])

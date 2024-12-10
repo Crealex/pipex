@@ -1,6 +1,6 @@
 NAME	=	pipex
 LIBFT	=	libft/libft.a
-SRCS	=	$(addprefix srcs/, pipex.c pipex_utils.c)
+SRCS	=	$(addprefix srcs/, pipex.c pipex_utils.c ft_split_pipex.c split_pipex_aux.c)
 OBJS	=	${SRCS:%.c=${OBJDIR}/%.o}
 CC		=	gcc
 CFLAGS	=	-Werror -Wextra -Wall

@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:42:42 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/09 18:41:43 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/10 10:26:06 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static void	fill_pipex(char **res, const char *s, char c)
 				i++;
 			continue ;
 		}
-		if (!single_quote(res[ires],(char *)s, &jres, &i));
+		if (!single_quote(res[ires],(char *)s, &jres, &i))
 			res[ires][jres++] = s[i++];
 	}
 	if (ires < counterc_pipex(s, c))
