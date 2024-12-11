@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:28:31 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/10 21:30:38 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/11 09:57:03 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,18 @@ int	single_quote(char *res,char *s, int *jres, int *i)
 	}
 	else
 		return (0);
+}
+
+void	free_split(char **res)
+{
+	int i;
+
+	i = 0;
+		while (res[i])
+	{
+		if (res[i])
+			free(res[i]);
+		i++;
+	}
+	free(res);
 }

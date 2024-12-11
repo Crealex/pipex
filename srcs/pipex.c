@@ -6,17 +6,22 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 17:27:00 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/10 18:39:19 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/11 13:57:37 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-int	parsing(char **argv, char **env, t_cmd *cmd)
+int	parsing(char **argv, char **env, t_cmd *cmd, t_fd *fd)
 {
 	char	**path;
 	char *env_path;
+	size_t
 
+	fd->pipefd[0] = -1;
+	fd->pipefd[1] = -1;
+	fd->fd1 = -1;
+	fd->fd2 = -1;
 	env_path = find_path_env(env);
 	path = ft_split(ft_substr(env_path, 5, 158), ':');
 	(*cmd).cmd1 = ft_split_pipex(argv[2], ' ');
@@ -30,7 +35,7 @@ int	parsing(char **argv, char **env, t_cmd *cmd)
 	return (1);
 }
 
-void	child1_process(t_cmd cmd, t_fd fd, char **env, char *file_path)
+void	child_process(t_cmd cmd, t_fd fd, char **env, char *file_path)
 {
 	fd.fd1 = open(file_path, O_RDONLY);
 	if (fd.fd1 < 0)
@@ -40,7 +45,7 @@ void	child1_process(t_cmd cmd, t_fd fd, char **env, char *file_path)
 	}
 	close(fd.pipefd[0]);
 	dup2(fd.fd1, STDIN_FILENO);
-	dup2(fd.pipefd[1], STDOUT_FILENO); // essaye d'inverser les arguements?
+	dup2(fd.pipefd[1], STDOUT_FILENO);
 	if (execve(cmd.path1, cmd.cmd1, env) == -1)
 	{
 		perror(RED"Erreur pendant l'execution de la commande 1\n"END);
@@ -48,7 +53,7 @@ void	child1_process(t_cmd cmd, t_fd fd, char **env, char *file_path)
 	}
 }
 
-void	child2_process(t_cmd cmd, t_fd fd, char **env, char *file_path)
+void	parent_process(t_cmd cmd, t_fd fd, char **env, char *file_path)
 {
 	fd.fd2 = open(file_path, O_RDWR | O_CREAT | O_TRUNC, 0744);
 	if (fd.fd2 < 0)
@@ -71,30 +76,22 @@ int main(int argc, char **argv, char **env)
 	t_fd	fd;
 	t_cmd	cmd;
 	pid_t	pid1;
-	pid_t	pid2;
 
 	if (argc == 5)
 	{
-		pipe(fd.pipefd);
-		if (!parsing(argv, env, &cmd))
+		if (!parsing(argv, env, &cmd, &fd))
 			return (1);
-		pid1 = fork(); // creer l'enfant qui servira pour cmd1
+		if (pipe(fd.pipefd) == -1)
+			manage_error(&cmd, NULL, fd, RED"Errror with pipe function!"END);
+		pid1 = fork();
 		if (pid1 < 0)
 			return (1);
 		else if (pid1 == 0)
 		{
-			child1_process(cmd, fd, env, argv[1]); //execution de la premiere commande dans child 1
+			child_process(cmd, fd, env, argv[1]);
 		}
-		pid2 = fork(); // creer l'enfant qui servira pour cmd2
-		if (pid2 < 0)
-			return (1);
-		else if (pid2 == 0)
-		{
-			child2_process(cmd, fd, env, argv[4]);
-		}
-		wait(NULL);
-		close(fd.pipefd[0]);
-		close(fd.pipefd[1]);
+		wait (NULL);
+		parent_process(cmd, fd, env, argv[4]);
 	}
 	else
 	{

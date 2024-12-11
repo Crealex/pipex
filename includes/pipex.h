@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 17:17:03 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/10 18:29:07 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/11 13:27:31 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ typedef struct s_fd
 int	write_str(int fd, char *str);
 int	find_path(char *cmd_name, char **path, t_cmd *cmd, int nb_cmd);
 char *find_path_env(char **env);
+void	manage_error(t_cmd	*cmd, char **path, t_fd fd, char *mess);
 //split
 char	**ft_split_pipex(char const *s, char c);
 //split_aux
 void handle_single_quote(const char *s, int *i, int *countl);
 int	single_quote(char *res,char *s, int *jres, int *i);
+void	free_split(char **res);
 
 #endif

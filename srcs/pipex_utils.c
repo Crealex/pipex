@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:11:40 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/10 18:28:31 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/11 10:32:15 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,29 @@ char *find_path_env(char **env)
 		i++;
 	}
 	return (NULL);
+}
+
+void	manage_error(t_cmd	*cmd, char **path, t_fd fd, char *mess)
+{
+	if (path)
+		free_split(path);
+	if (fd.pipefd[0] > -1)
+		close(fd.pipefd[0]);
+	if (fd.pipefd[1])
+		close(fd.pipefd[1] > -1);
+	if (fd.fd1)
+		close(fd.fd1 > -1);
+	if (fd.fd2)
+		close(fd.fd2 > -1);
+	if (cmd->cmd1)
+		free_split(cmd->cmd1);
+	if (cmd->cmd2)
+		free_split(cmd->cmd2);
+	if (cmd->path1)
+		free(cmd->path1);
+	if (cmd->path2)
+		free(cmd->path2);
+	if (mess)
+		perror(mess);
+	exit (EXIT_FAILURE);
 }
