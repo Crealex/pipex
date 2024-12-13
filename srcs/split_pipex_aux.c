@@ -6,27 +6,27 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:28:31 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/11 09:57:03 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/13 14:13:23 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void handle_single_quote(const char *s, int *i, int *countl)
+void	handle_single_quote(const char *s, int *i, int *countl)
 {
-	(*i)++;  // Skip the opening quote
+	(*i)++;
 	while (s[*i] != '\'' && s[*i])
 	{
 		(*countl)++;
 		(*i)++;
 	}
-	(*i)++;  // Skip the closing quote
+	(*i)++;
 }
 
-int	single_quote(char *res,char *s, int *jres, int *i)
+int	single_quote(char *res, char *s, int *jres, int *i)
 {
-	int si;
-	int ri;
+	int	si;
+	int	ri;
 
 	si = *i;
 	ri = *jres;
@@ -54,10 +54,10 @@ int	single_quote(char *res,char *s, int *jres, int *i)
 
 void	free_split(char **res)
 {
-	int i;
+	int	i;
 
 	i = 0;
-		while (res[i])
+	while (res[i])
 	{
 		if (res[i])
 			free(res[i]);

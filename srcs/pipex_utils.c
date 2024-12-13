@@ -6,7 +6,7 @@
 /*   By: atomasi <atomasi@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:11:40 by atomasi           #+#    #+#             */
-/*   Updated: 2024/12/12 16:25:28 by atomasi          ###   ########.fr       */
+/*   Updated: 2024/12/13 14:15:16 by atomasi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	write_str(int fd, char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
 	{
-		 if (!write(fd, &str[i], 1))
-		 	return (0);
+		if (!write(fd, &str[i], 1))
+			return (0);
 		i++;
 	}
 	return (1);
@@ -44,19 +44,17 @@ int	find_path(char *cmd_name, char **path, t_cmd *cmd, int nb_cmd)
 				(*cmd).path1 = ft_strdup(full_path);
 			else
 				(*cmd).path2 = ft_strdup(full_path);
-			free(full_path);
-			return (1);
+			return (free(full_path), 1);
 		}
 		free(full_path);
 		i++;
 	}
-	free(path_name);
-	return (0);
+	return (free(path_name), 0);
 }
 
-char *find_path_env(char **env)
+char	*find_path_env(char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (env[i])
